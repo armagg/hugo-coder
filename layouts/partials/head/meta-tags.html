@@ -9,8 +9,29 @@
 {{ with .Site.Params.author }}
 <meta name="author" content="{{ . }}">{{ end }}
 <meta name="description" content="{{ .Description | default (.Summary | default .Site.Params.description ) }}">
-<meta name="keywords" content="{{ (delimit .Keywords ", ") | default .Site.Params.keywords }}">
-{{ if or .Params.fediverseCreator .Site.Params.fediverseCreator }}<meta name="fediverse:creator" content="{{ .Params.fediverseCreator | default .Site.Params.fediverseCreator }}" />{{end}}
+<meta name="keywords" content="{{ (delimit .Keywords " , ") | default .Site.Params.keywords }}">
+{{ if or .Params.fediverseCreator .Site.Params.fediverseCreator }}
+<meta name="fediverse:creator" content="{{ .Params.fediverseCreator | default .Site.Params.fediverseCreator }}" />
+{{end}}
 
 {{ template "_internal/twitter_cards.html" . }}
 {{ template "_internal/opengraph.html" . }}
+
+{{ if .IsHome }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Omid Mesgarha",
+  "url": "https://omidm.dev/",
+  "image": "https://omidm.dev/images/avatar.jpg",
+  "sameAs": [
+    "https://github.com/armagg",
+    "https://www.linkedin.com/in/omid-mesgarha-27a496162/",
+    "https://twitter.com/omid0390"
+  ],
+  "jobTitle": "Blockchain Developer & Web3 Enthusiast",
+  "description": "Exploring decentralized technologies, smart contracts, and the future of the internet. Sharing insights, tutorials, and personal projects in the blockchain space."
+}
+</script>
+{{ end }}
